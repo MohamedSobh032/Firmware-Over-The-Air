@@ -1,0 +1,3 @@
+../Src/MRCC_Program.c:21:6:MRCC_voidInitSysAndBusClock	2
+../Src/MRCC_Program.c:125:6:MRCC_voidEnablePeriphClock	9
+../Src/MRCC_Program.c:147:6:MRCC_voidDisablePeriphClock	9

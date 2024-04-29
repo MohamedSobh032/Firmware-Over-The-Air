@@ -1,0 +1,8 @@
+../Src/MSTK_Program.c:26:6:MSTK_voidInit	4	static
+../Src/MSTK_Program.c:42:6:MSTK_voidDisable	4	static
+../Src/MSTK_Program.c:56:6:MSTK_voidBusyWait	16	static
+../Src/MSTK_Program.c:77:6:MSTK_voidSingleInterval	16	static
+../Src/MSTK_Program.c:101:6:MSTK_voidPeriodicInterval	16	static
+../Src/MSTK_Program.c:124:5:MSTK_u32GetElapsedTicks	4	static
+../Src/MSTK_Program.c:133:5:MSTK_u32GetRemainingTicks	4	static
+../Src/MSTK_Program.c:142:6:SysTick_Handler	8	static
