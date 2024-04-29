@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OTA ARM Project</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<header>
+		<h1>OTA (Over The Air) ARM Project</h1>
+		<p>This is an OTA project that allows you to flash your Projects on the MCU</p>
+		<p>In the LinkerScript, Change the Flash Length to minimum 240K</p>
+	</header>
+	<main>
+		<form id="upload-form">
+			<label for="hex-file">Choose a Project</label>
+			<input type="file" id="hex-file" accept=".hex">
+			<button type="submit">Upload</button>
+		</form>
+		<h2>Uploaded Projects</h2>
+		<p id="hex-list"></p>
+		<h2>Choose a Project to Flash</h2>
+		<select id="hex-select"> <option value="">Select a Project</option> </select>
+		<button id="flash-button">Flash</button>
+		<p>Implemented by: Mohamed Sobh<p>
+	</main>
+	<script src="script.js"></script>
+</body>
+</html>
