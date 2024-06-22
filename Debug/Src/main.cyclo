@@ -1,1 +1,10 @@
-../Src/main.c:22:5:main	1
+../Src/main.c:52:5:main	14
+../Src/main.c:101:6:BOOT_vHWReset	1
+../Src/main.c:109:6:BOOT_vInitESP	15
+../Src/main.c:148:6:BOOT_vInit	1
+../Src/main.c:181:6:BOOT_vGetFirmwareStatus	22
+../Src/main.c:251:6:BOOT_vEraseSectors	2
+../Src/main.c:256:6:BOOT_vJumpToApplicationCode	1
+../Src/main.c:269:6:BOOT_vReceiveDataRecord	22
+../Src/main.c:330:6:BOOT_vFlashRecord	1
+../Src/main.c:336:6:BOOT_vUpdateFirmwareStatus	28

@@ -5,6 +5,7 @@
 /* Date: 02 APR 2024                                  */
 /* Description: This is the implem. of HPR            */
 /******************************************************/
+#include "stdlib.h"
 #include "LBIT_MATH.h"
 #include "LSTD_TYPES.h"
 #include "MFMI_Interface.h"
@@ -38,7 +39,8 @@ void SHPR_voidParseHexRecord(u8* Copy_u8DataRecord)
 		/* Get The Address Location */
 		u32 Local_u32Addresss = Global_u32BaseAddress + (u32)(Local_u16OffsetAddress);
 		u8 Local_u8Counter = 0;
-		u16 Local_u16Data[Local_u8Length/2];
+		u16* Local_u16Data = (u16*)malloc(sizeof(u16) * (Local_u8Length / 2));
+		//u16 Local_u16Data[Local_u8Length/2];
 		for (Local_u8Counter = 0; Local_u8Counter < Local_u8Length/2; Local_u8Counter++)
 		{
 			Local_u16Data[Local_u8Counter] = (u16)(((u16)(Private_u8ASCII2Hex(Copy_u8DataRecord[(4*Local_u8Counter)+9])<<4))

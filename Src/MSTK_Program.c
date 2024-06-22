@@ -13,7 +13,7 @@
 #include "MSTK_Private.h"
 
 /* Global Pointer to Function */
-void (*MSTK_CallBack)(void) = NULL;
+void (*MSTK_CallBack)(void) = (void*)0;
 /* Global Variable for Interval Mode */
 u8 Global_u8CallMode = 0;
 
@@ -141,7 +141,7 @@ void SysTick_Handler() {
         STK_LOAD = 0;
         STK_VAL = 0;
     }
-    if (MSTK_CallBack != NULL) { MSTK_CallBack(); }
+    if (MSTK_CallBack != (void*)0) { MSTK_CallBack(); }
     /* Clear Flag */
     (void)GET_BIT(STK_CTRL,MSTK_CTRL_COUNTFLAG_BIT);
 }
