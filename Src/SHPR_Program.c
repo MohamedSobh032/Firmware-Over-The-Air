@@ -1,12 +1,12 @@
-/**********************************************/
-/* SWC: HPR Driver                            */
-/* Author: Mohamed Sobh                       */
-/* Version: v0.0                              */
-/* Date: 18 JAN 2024                          */
-/* Description: This is the implem. of HPR    */
-/**********************************************/
-#include <LBIT_MATH.h>
-#include <LSTD_TYPES.h>
+/******************************************************/
+/* SWC: HPR Driver                                    */
+/* Author: Mohamed Sobh                               */
+/* Version: v1.0                                      */
+/* Date: 02 APR 2024                                  */
+/* Description: This is the implem. of HPR            */
+/******************************************************/
+#include "LBIT_MATH.h"
+#include "LSTD_TYPES.h"
 #include "MFMI_Interface.h"
 
 u32 Global_u32BaseAddress = 0;
@@ -46,7 +46,7 @@ void SHPR_voidParseHexRecord(u8* Copy_u8DataRecord)
 												 | ((u16)(Private_u8ASCII2Hex(Copy_u8DataRecord[(4*Local_u8Counter)+11])<<12))
 												 | ((u16)(Private_u8ASCII2Hex(Copy_u8DataRecord[(4*Local_u8Counter)+12])<<8)));
 		}
-		MFMI_voidProgram(Local_u32Addresss, (u16*)Local_u16Data, Local_u8Length/2);
+		MFMI_vProgram(Local_u32Addresss, (u16*)Local_u16Data, Local_u8Length/2);
 	}
 }
 

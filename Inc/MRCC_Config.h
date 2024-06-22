@@ -1,11 +1,11 @@
-/********************************************/
-/* SWC: RCC Driver                          */
-/* Author: Mohamed Sobh                     */
-/* Version: v0.0                            */
-/* Date: 04 AUG 2023                        */
-/* Description: This is the implem. of RCC  */
-/********************************************/
-/* File Guard */
+/******************************************************/
+/* SWC: RCC Driver                                    */
+/* Author: Mohamed Sobh                               */
+/* Version: v2.0                                      */
+/* Date: 02 APR 2024                                  */
+/* Description: This is the implem. of RCC            */
+/******************************************************/
+/* Header File Guard */
 #ifndef _MRCC_CONFIG_H_
 #define _MRCC_CONFIG_H_
 

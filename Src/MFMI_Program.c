@@ -1,45 +1,44 @@
-/********************************************/
-/* SWC: FMI Driver                          */
-/* Author: Mohamed Sobh                     */
-/* Version: v0.0                            */
-/* Date: 18 JAN 2024                        */
-/* Description: This is the implem. of FMI  */
-/********************************************/
+/******************************************************/
+/* SWC: FMI Driver                                    */
+/* Author: Mohamed Sobh                               */
+/* Version: v2.0                                      */
+/* Date: 02 APR 2024                                  */
+/* Description: This is the implem. of FMI            */
+/******************************************************/
 
-#include <LBIT_MATH.h>
-#include <LSTD_TYPES.h>
+#include "LBIT_MATH.h"
+#include "LSTD_TYPES.h"
 #include "MFMI_Config.h"
-#include "MFMI_Interface.h"
 #include "MFMI_Private.h"
+#include "MFMI_Interface.h"
 
 /*************************************************/
-/* Func. Name: MFMI_voidInit                     */
+/* Func. Name: MFMI_vInit                        */
 /* i/p arguments: nothing 					     */
 /* o/p arguments: nothing                        */
 /* Desc. : This API initializes the Flash Driver */
 /*************************************************/
-void MFMI_voidInit(void)
-{
+void MFMI_vInit(void) {
 	/* Unlock the Flash */
-	Private_voidFlashUnlock();
+	Private_vFlashUnlock();
 	/* Set the Programming Size */
 	WRITE_BITS(FMI->CR,MFMI_PROGRAM_SIZE,TWO_BITS,MFMI_CR_PSIZE_BIT);
 	/* Lock the Flash */
-	Private_voidFlashLock();
+	Private_vFlashLock();
 }
 
 /***********************************************************/
-/* Func. Name: MFMI_voidSectorErase                        */
+/* Func. Name: MFMI_vSectorErase                           */
 /* i/p arguments: Copy_u8SectorNumber: Sector to be Erased */
 /* o/p arguments: nothing                              	   */
 /* Desc. : This API Erases a Full Sector in the Flash      */
 /***********************************************************/
-void MFMI_voidSectorErase(u8 Copy_u8SectorNumber)
+void MFMI_vSectorErase(u8 Copy_u8SectorNumber)
 {
 	/* Wait for the Flash to be not Busy */
 	while(GET_BIT(FMI->SR,MFMI_SR_BSY_BIT));
 	/* Unlock the Flash */
-	Private_voidFlashUnlock();
+	Private_vFlashUnlock();
 	/* Select Sector Number */
 	WRITE_BITS(FMI->CR,Copy_u8SectorNumber,FOUR_BITS,MFMI_CR_SNB_BIT);
 	/* Select Erase Operation */
@@ -53,7 +52,7 @@ void MFMI_voidSectorErase(u8 Copy_u8SectorNumber)
 	/* Deselect Erase Operation */
 	CLR_BIT(FMI->CR,MFMI_CR_SER_BIT);
 	/* Lock the Flash */
-	Private_voidFlashLock();
+	Private_vFlashLock();
 }
 
 /*********************************************************************************/
@@ -64,12 +63,12 @@ void MFMI_voidSectorErase(u8 Copy_u8SectorNumber)
 /* o/p arguments: nothing                              				   			 */
 /* Desc. : This API Flashes an Array at a Specific Address 			   			 */
 /*********************************************************************************/
-void MFMI_voidProgram(u32 Copy_u32Address, u16* Copy_u16DataToBeWritten, u16 Copy_u16Length)
+void MFMI_vProgram(u32 Copy_u32Address, u16* Copy_u16DataToBeWritten, u16 Copy_u16Length)
 {
 	/* Wait for the Flash to be not Busy */
 	while(GET_BIT(FMI->SR,MFMI_SR_BSY_BIT));
 	/* Unlock the Flash */
-	Private_voidFlashUnlock();
+	Private_vFlashUnlock();
 	/* Select Programming Operation */
 	SET_BIT(FMI->CR,MFMI_CR_PG_BIT);
 	/* Write The Data to be Written */
@@ -86,7 +85,7 @@ void MFMI_voidProgram(u32 Copy_u32Address, u16* Copy_u16DataToBeWritten, u16 Cop
 	/* Deselect Programming Operation */
 	CLR_BIT(FMI->CR,MFMI_CR_PG_BIT);
 	/* Lock the Flash */
-	Private_voidFlashLock();
+	Private_vFlashLock();
 }
 
 /************************************/
@@ -95,7 +94,7 @@ void MFMI_voidProgram(u32 Copy_u32Address, u16* Copy_u16DataToBeWritten, u16 Cop
 /* o/p arguments: nothing           */
 /* Desc. : This API Locks the Flash */
 /************************************/
-static void Private_voidFlashLock()
+static void Private_vFlashLock()
 { SET_BIT(FMI->CR,MFMI_CR_LOCK_BIT); }
 
 /**************************************/
@@ -104,7 +103,7 @@ static void Private_voidFlashLock()
 /* o/p arguments: nothing             */
 /* Desc. : This API Unlocks the Flash */
 /**************************************/
-static void Private_voidFlashUnlock()
+static void Private_vFlashUnlock()
 {
 	FMI->KEYR = MFMI_KEYR_KEY1;
 	FMI->KEYR = MFMI_KEYR_KEY2;

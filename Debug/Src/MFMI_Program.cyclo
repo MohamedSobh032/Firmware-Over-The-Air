@@ -1,5 +1,5 @@
-../Src/MFMI_Program.c:21:6:MFMI_voidInit	1
-../Src/MFMI_Program.c:37:6:MFMI_voidSectorErase	3
-../Src/MFMI_Program.c:67:6:MFMI_voidProgram	4
-../Src/MFMI_Program.c:98:13:Private_voidFlashLock	1
-../Src/MFMI_Program.c:107:13:Private_voidFlashUnlock	1
+../Src/MFMI_Program.c:21:6:MFMI_vInit	1
+../Src/MFMI_Program.c:36:6:MFMI_vSectorErase	3
+../Src/MFMI_Program.c:66:6:MFMI_vProgram	4
+../Src/MFMI_Program.c:97:13:Private_vFlashLock	1
+../Src/MFMI_Program.c:106:13:Private_vFlashUnlock	1

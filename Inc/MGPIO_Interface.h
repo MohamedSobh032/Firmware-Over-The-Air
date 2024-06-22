@@ -1,14 +1,17 @@
-/**********************************************/
-/* SWC: GPIO Driver                           */
-/* Author: Mohamed Sobh                       */
-/* Version: v0.0                              */
-/* Date: 11 AUG 2023                          */
-/* Description: This is the implem. of GPIO   */
-/**********************************************/
-/* File Guard */
+/******************************************************/
+/* SWC: GPIO Driver                                   */
+/* Author: Mohamed Sobh                               */
+/* Version: v2.0                                      */
+/* Date: 02 APR 2024                                  */
+/* Description: This is the implem. of GPIO           */
+/******************************************************/
+/* Header File Guard */
 #ifndef _MGPIO_INTERFACE_H_
 #define _MGPIO_INTERFACE_H_
 
+/**********************************************/
+/*               GPIO Registers               */
+/**********************************************/
 typedef struct {
     volatile u32 MODER;
     volatile u32 OTYPER;
@@ -22,14 +25,15 @@ typedef struct {
     volatile u32 AFRH;
 } GPIO_t;
 
-
 /* GPIOA Base Address is 0x40020000 */
-#define GPIOA       ((GPIO_t*)0x40020000)
+#define MGPIOA_BASE_ADDRESS		0x40020000
+#define GPIOA       ((GPIO_t*)MGPIOA_BASE_ADDRESS)
 /* GPIOB Base Address is 0x40020400 */
-#define GPIOB       ((GPIO_t*)0x40020400)
+#define MGPIOB_BASE_ADDRESS		0x40020400
+#define GPIOB       ((GPIO_t*)MGPIOB_BASE_ADDRESS)
 /* GPIOC Base Address is 0x40020800 */
-#define GPIOC       ((GPIO_t*)0x40020800)
-
+#define MGPIOC_BASE_ADDRESS		0x40020800
+#define GPIOC       ((GPIO_t*)MGPIOC_BASE_ADDRESS)
 
 /**********************************************/
 /*                  GPIO Pins                 */
@@ -75,16 +79,22 @@ typedef enum {
 	MGPIO_AF15 = 15,
 } MGPIO_AF;
 
-void MGPIO_voidSetPinMode        (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, u8 Copy_u8Mode);
-void MGPIO_voidSetPinOutputType  (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, u8 Copy_u8OType);
-void MGPIO_voidSetPinOutputSpeed (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, u8 Copy_u8Speed);
-void MGPIO_voidSetPinInputType   (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, u8 Copy_u8IType);
-void MGPIO_voidSetPinAFDirection (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, MGPIO_AF Copy_GPIOAFDir);
-void MGPIO_voidSetPinValue       (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, u8 Copy_u8Value);
-void MGPIO_voidSetPartValue      (GPIO_t* GPIOx, u16 Copy_u16Data, BIT_SIZE Copy_BITSize, MGPIO_PIN Copy_GPIOPinStart);
-void MGPIO_voidSetPinDirectAccess(GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, u8 Copy_u8Value);
-void MGPIO_voidTogglePinValue    (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin);
-u8 MGPIO_u8GetPinValue           (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin);
+
+/**********************************************/
+/*             Function Prototypes            */
+/**********************************************/
+void MGPIO_vSetPinMode        (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, u8 Copy_u8Mode);
+void MGPIO_vSetPinOutputType  (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, u8 Copy_u8OType);
+void MGPIO_vSetPinOutputSpeed (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, u8 Copy_u8Speed);
+void MGPIO_vSetPinInputType   (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, u8 Copy_u8IType);
+void MGPIO_vSetPinAFDirection (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, MGPIO_AF Copy_GPIOAFDir);
+
+void MGPIO_vSetPinValue       (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, u8 Copy_u8Value);
+void MGPIO_vSetPartValue      (GPIO_t* GPIOx, u16 Copy_u16Data, BIT_SIZE Copy_BITSize, MGPIO_PIN Copy_GPIOPinStart);
+void MGPIO_vSetPinDirectAccess(GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin, u8 Copy_u8Value);
+void MGPIO_vTogglePinValue    (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin);
+u8   MGPIO_u8GetPinValue      (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin);
+bool MGPIO_bLockPin           (GPIO_t* GPIOx, MGPIO_PIN Copy_GPIOPin);
 
 /**********************************************/
 /*               GPIO Pin Modes               */

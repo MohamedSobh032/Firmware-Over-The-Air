@@ -1,11 +1,11 @@
-/********************************************/
-/* SWC: FMI Driver                          */
-/* Author: Mohamed Sobh                     */
-/* Version: v0.0                            */
-/* Date: 18 JAN 2024                        */
-/* Description: This is the implem. of FMI  */
-/********************************************/
-/* File Guard */
+/******************************************************/
+/* SWC: FMI Driver                                    */
+/* Author: Mohamed Sobh                               */
+/* Version: v2.0                                      */
+/* Date: 02 APR 2024                                  */
+/* Description: This is the implem. of FMI            */
+/******************************************************/
+/* Header File Guard */
 #ifndef _MFMI_CONFIG_H_
 #define _MFMI_CONFIG_H_
 

@@ -1,4 +1,1 @@
-../Src/main.c:37:6:BOOT_voidJump	1
-../Src/main.c:51:6:BOOT_voidHWReset	1
-../Src/main.c:60:6:BOOT_voidESPSettings	15
-../Src/main.c:106:5:main	84
+../Src/main.c:22:5:main	1

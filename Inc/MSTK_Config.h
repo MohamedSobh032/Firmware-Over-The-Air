@@ -1,11 +1,11 @@
-/********************************************/
-/* SWC: STK Driver                          */
-/* Author: Mohamed Sobh                     */
-/* Version: v0.0                            */
-/* Date: 12 AUG 2023                        */
-/* Description: This is the implem. of STK  */
-/********************************************/
-/* File Guard */
+/******************************************************/
+/* SWC: STK Driver                                    */
+/* Author: Mohamed Sobh                               */
+/* Version: v2.0                                      */
+/* Date: 02 APR 2024                                  */
+/* Description: This is the implem. of STK            */
+/******************************************************/
+/* Header File Guard */
 #ifndef _MSTK_CONFIG_H_
 #define _MSTK_CONFIG_H_
 

@@ -1,8 +1,8 @@
-../Src/MSTK_Program.c:26:6:MSTK_voidInit	1
-../Src/MSTK_Program.c:42:6:MSTK_voidDisable	1
-../Src/MSTK_Program.c:56:6:MSTK_voidBusyWait	2
-../Src/MSTK_Program.c:77:6:MSTK_voidSingleInterval	1
-../Src/MSTK_Program.c:101:6:MSTK_voidPeriodicInterval	1
-../Src/MSTK_Program.c:124:5:MSTK_u32GetElapsedTicks	1
-../Src/MSTK_Program.c:133:5:MSTK_u32GetRemainingTicks	1
-../Src/MSTK_Program.c:142:6:SysTick_Handler	3
+../Src/MSTK_Program.c:26:6:MSTK_vInit	1
+../Src/MSTK_Program.c:41:6:MSTK_vDisable	1
+../Src/MSTK_Program.c:54:6:MSTK_vBusyWait	2
+../Src/MSTK_Program.c:74:6:MSTK_vSingleCall	1
+../Src/MSTK_Program.c:97:6:MSTK_vPeriodicCall	1
+../Src/MSTK_Program.c:119:5:MSTK_u32GetElapsedTicks	1
+../Src/MSTK_Program.c:127:5:MSTK_u32GetRemainingTicks	1
+../Src/MSTK_Program.c:135:6:SysTick_Handler	3

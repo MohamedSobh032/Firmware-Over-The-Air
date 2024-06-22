@@ -1,5 +1,5 @@
-../Src/MFMI_Program.c:21:6:MFMI_voidInit	8	static
-../Src/MFMI_Program.c:37:6:MFMI_voidSectorErase	16	static
-../Src/MFMI_Program.c:67:6:MFMI_voidProgram	32	static
-../Src/MFMI_Program.c:98:13:Private_voidFlashLock	4	static
-../Src/MFMI_Program.c:107:13:Private_voidFlashUnlock	4	static
+../Src/MFMI_Program.c:21:6:MFMI_vInit	8	static
+../Src/MFMI_Program.c:36:6:MFMI_vSectorErase	16	static
+../Src/MFMI_Program.c:66:6:MFMI_vProgram	32	static
+../Src/MFMI_Program.c:97:13:Private_vFlashLock	4	static
+../Src/MFMI_Program.c:106:13:Private_vFlashUnlock	4	static

@@ -1,11 +1,11 @@
-/********************************************/
-/* SWC: FMI Driver                          */
-/* Author: Mohamed Sobh                     */
-/* Version: v0.0                            */
-/* Date: 18 JAN 2024                        */
-/* Description: This is the implem. of FMI  */
-/********************************************/
-/* File Guard */
+/******************************************************/
+/* SWC: FMI Driver                                    */
+/* Author: Mohamed Sobh                               */
+/* Version: v2.0                                      */
+/* Date: 02 APR 2024                                  */
+/* Description: This is the implem. of FMI            */
+/******************************************************/
+/* Header File Guard */
 #ifndef _MFMI_PRIVATE_H_
 #define _MFMI_PRIVATE_H_
 
@@ -21,13 +21,11 @@ typedef struct {
 #define FMI		((FMI_t*) 0x40023C00)
 
 
-
 /**********************************************/
 /*     Private Functions for Flash Driver     */
 /**********************************************/
-static void Private_voidFlashLock(void);
-static void Private_voidFlashUnlock(void);
-
+static void Private_vFlashLock(void);
+static void Private_vFlashUnlock(void);
 
 
 /**********************************************/
@@ -49,8 +47,6 @@ static void Private_voidFlashUnlock(void);
 #define MFMI_PROGRAM_SIZE_32		0b10
 /* PROGRAM x64 */
 #define MFMI_PROGRAM_SIZE_64		0b11
-
-
 
 /**********************************************/
 /* 				SR BITS Mapping 			  */
@@ -75,7 +71,5 @@ static void Private_voidFlashUnlock(void);
 #define MFMI_CR_STRT_BIT	16
 /* LOCK Flag */
 #define MFMI_CR_LOCK_BIT	31
-
-
 
 #endif /* _MFMI_PRIVATE_H_ */

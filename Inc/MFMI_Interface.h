@@ -1,17 +1,17 @@
-/********************************************/
-/* SWC: FMI Driver                          */
-/* Author: Mohamed Sobh                     */
-/* Version: v0.0                            */
-/* Date: 18 JAN 2024                        */
-/* Description: This is the implem. of FMI  */
-/********************************************/
-/* File Guard */
+/******************************************************/
+/* SWC: FMI Driver                                    */
+/* Author: Mohamed Sobh                               */
+/* Version: v2.0                                      */
+/* Date: 02 APR 2024                                  */
+/* Description: This is the implem. of FMI            */
+/******************************************************/
+/* Header File Guard */
 #ifndef _MFMI_INTERFACE_H_
 #define _MFMI_INTERFACE_H_
 
-void MFMI_voidInit(void);
-void MFMI_voidSectorErase(u8 Copy_u8SectorNumber);
-void MFMI_voidProgram(u32 Copy_u32Address, u16* Copy_u16DataToBeWritten, u16 Copy_u16Length);
+void MFMI_vInit(void);
+void MFMI_vSectorErase(u8 Copy_u8SectorNumber);
+void MFMI_vProgram(u32 Copy_u32Address, u16* Copy_u16DataToBeWritten, u16 Copy_u16Length);
 
 typedef enum {
 	MFMI_SECTOR_ZERO  = 0,
