@@ -9,10 +9,6 @@
 #ifndef _MFMI_INTERFACE_H_
 #define _MFMI_INTERFACE_H_
 
-void MFMI_vInit(void);
-void MFMI_vSectorErase(u8 Copy_u8SectorNumber);
-void MFMI_vProgram(u32 Copy_u32Address, u16* Copy_u16DataToBeWritten, u16 Copy_u16Length);
-
 typedef enum {
 	MFMI_SECTOR_ZERO  = 0,
 	MFMI_SECTOR_ONE   = 1,
@@ -21,7 +17,13 @@ typedef enum {
 	MFMI_SECTOR_FOUR  = 4,
 	MFMI_SECTOR_FIVE  = 5,
 	MFMI_SECTOR_SIX   = 6,
-	MFMI_SECTOR_SEVEN = 7
-} MFMI_SectorNumbers;
+	MFMI_SECTOR_SEVEN = 7,
+	MFMI_FALSE_SECTOR = 10
+} MFMI_SectorNumber;
+
+void MFMI_vInit(void);
+MFMI_SectorNumber MFMI_getSectorNumber(u32 Copy_u32Address);
+void MFMI_vSectorErase(u8 Copy_u8SectorNumber);
+void MFMI_vProgram(u32 Copy_u32Address, u16* Copy_u16DataToBeWritten, u16 Copy_u16Length);
 
 #endif /* _MFMI_INTERFACE_H_ */

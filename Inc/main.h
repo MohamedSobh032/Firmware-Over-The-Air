@@ -2,6 +2,7 @@
 #define MAIN_H_
 
 /************************************** ESP8266 SETTINGS **************************************/
+
 /****************** HW SETTINGS ******************/
 /* Used USART in the Bootloader */
 #define ESP8266_USART			USART1
@@ -16,21 +17,27 @@
 #define ESP8266_USART_TX_AF		MGPIO_AF07
 #define ESP8266_USART_RX_AF		MGPIO_AF07
 /* INITIALIZATION */
-#define ESP8266_USART_INIT_STRUCTURE	{115200, MUSART_DATAWIDTH_8BIT, \
-										MUSART_STOP_ONE_BIT, MUSART_DISABLE, \
-										MUSART_PARITY_EVEN, MUSART_DIRECTION_TX_RX, \
-										MUSART_DISABLE, MUSART_OVER_SAMPLING_16}
+#define ESP8266_USART_INIT_STRUCTURE	{115200, MUSART_DATAWIDTH_8BIT, MUSART_STOP_ONE_BIT, MUSART_DISABLE, MUSART_PARITY_EVEN, MUSART_DIRECTION_TX_RX, MUSART_DISABLE, MUSART_OVER_SAMPLING_16}
 /*************************************************/
+
 /****************** SW SETTINGS ******************/
 /* RESET DELAY */
 #define ESP8266_RESET_DELAY		1000
 /* THRESHOLD OF READING */
 #define BOOT_THRESHOLD_VALUE	0x0F
 /*************************************************/
+
 /**********************************************************************************************/
 
-/* Sectors That Will be Taken From the Flash Starting From Sector 1 */
-#define _SECTORS_TO_BE_ERASED_		3
 
+/************************************* ALGORITHM SETTINGS *************************************/
+
+typedef enum {
+	FAILED_TO_FETCH = 0,
+	CONTINUE = 1,
+	CAN_NOT_SEND = 2
+} CONTINUE_FLAG;
+
+/**********************************************************************************************/
 
 #endif /* MAIN_H_ */

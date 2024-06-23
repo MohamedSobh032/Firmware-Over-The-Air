@@ -20,13 +20,25 @@ typedef struct {
 
 #define FMI		((FMI_t*) 0x40023C00)
 
+/**********************************************/
+/*          Enumerator for Addresses          */
+/**********************************************/
+typedef enum {
+	MFMI_SECTOR_ZERO_ADDRESS  = 0x08000000,
+	MFMI_SECTOR_ONE_ADDRESS   = 0x08004000,
+	MFMI_SECTOR_TWO_ADDRESS   = 0x08008000,
+	MFMI_SECTOR_THREE_ADDRESS = 0x0800C000,
+	MFMI_SECTOR_FOUR_ADDRESS  = 0x08010000,
+	MFMI_SECTOR_FIVE_ADDRESS  = 0x08020000,
+	MFMI_SECTOR_SIX_ADDRESS   = 0x08040000,
+	MFMI_SECTOR_SEVEN_ADDRESS = 0x08060000
+} MFMI_SECTOR_ADDRESS;
 
 /**********************************************/
 /*     Private Functions for Flash Driver     */
 /**********************************************/
 static void Private_vFlashLock(void);
 static void Private_vFlashUnlock(void);
-
 
 /**********************************************/
 /* 				KEYR KEY Values 			  */

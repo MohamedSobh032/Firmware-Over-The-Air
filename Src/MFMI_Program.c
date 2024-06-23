@@ -22,9 +22,28 @@ void MFMI_vInit(void) {
 	/* Unlock the Flash */
 	Private_vFlashUnlock();
 	/* Set the Programming Size */
-	WRITE_BITS(FMI->CR,MFMI_PROGRAM_SIZE,TWO_BITS,MFMI_CR_PSIZE_BIT);
+	WRITE_BITS(FMI->CR, MFMI_PROGRAM_SIZE, TWO_BITS, MFMI_CR_PSIZE_BIT);
 	/* Lock the Flash */
 	Private_vFlashLock();
+}
+
+/*****************************************************************/
+/* Func. Name: MFMI_getSectorNumber                              */
+/* i/p arguments: Copy_u32Address: Address by the User           */
+/* o/p arguments: The Sector Number Where the Address is Located */
+/* Desc. : This API initializes the Flash Driver                 */
+/*****************************************************************/
+MFMI_SectorNumber MFMI_getSectorNumber(u32 Copy_u32Address) {
+	if (Copy_u32Address < MFMI_SECTOR_ZERO)  return MFMI_FALSE_SECTOR;
+	if (Copy_u32Address < MFMI_SECTOR_ONE)   return MFMI_SECTOR_ZERO;
+	if (Copy_u32Address < MFMI_SECTOR_TWO)   return MFMI_SECTOR_ONE;
+	if (Copy_u32Address < MFMI_SECTOR_THREE) return MFMI_SECTOR_TWO;
+	if (Copy_u32Address < MFMI_SECTOR_FOUR)  return MFMI_SECTOR_THREE;
+	if (Copy_u32Address < MFMI_SECTOR_FIVE)  return MFMI_SECTOR_FOUR;
+	if (Copy_u32Address < MFMI_SECTOR_SIX)   return MFMI_SECTOR_FIVE;
+	if (Copy_u32Address < MFMI_SECTOR_SEVEN) return MFMI_SECTOR_SIX;
+	if (Copy_u32Address < 0x0807FFFF)        return MFMI_SECTOR_SEVEN;
+	return MFMI_FALSE_SECTOR;
 }
 
 /***********************************************************/
@@ -36,21 +55,21 @@ void MFMI_vInit(void) {
 void MFMI_vSectorErase(u8 Copy_u8SectorNumber)
 {
 	/* Wait for the Flash to be not Busy */
-	while(GET_BIT(FMI->SR,MFMI_SR_BSY_BIT));
+	while(GET_BIT(FMI->SR, MFMI_SR_BSY_BIT));
 	/* Unlock the Flash */
 	Private_vFlashUnlock();
 	/* Select Sector Number */
-	WRITE_BITS(FMI->CR,Copy_u8SectorNumber,FOUR_BITS,MFMI_CR_SNB_BIT);
+	WRITE_BITS(FMI->CR,Copy_u8SectorNumber, FOUR_BITS, MFMI_CR_SNB_BIT);
 	/* Select Erase Operation */
-	SET_BIT(FMI->CR,MFMI_CR_SER_BIT);
+	SET_BIT(FMI->CR, MFMI_CR_SER_BIT);
 	/* Start Operation */
-	SET_BIT(FMI->CR,MFMI_CR_STRT_BIT);
+	SET_BIT(FMI->CR, MFMI_CR_STRT_BIT);
 	/* Wait for the Flash to be not Busy */
-	while(GET_BIT(FMI->SR,MFMI_SR_BSY_BIT));
+	while(GET_BIT(FMI->SR, MFMI_SR_BSY_BIT));
 	/* Clear EOP by Writing 1 */
-	SET_BIT(FMI->SR,MFMI_SR_EOP_BIT);
+	SET_BIT(FMI->SR, MFMI_SR_EOP_BIT);
 	/* Deselect Erase Operation */
-	CLR_BIT(FMI->CR,MFMI_CR_SER_BIT);
+	CLR_BIT(FMI->CR, MFMI_CR_SER_BIT);
 	/* Lock the Flash */
 	Private_vFlashLock();
 }

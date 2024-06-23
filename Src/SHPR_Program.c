@@ -56,7 +56,7 @@ void SHPR_vParseHexRecord(u8* Copy_u8DataRecord) {
 		u8 Local_u8Counter = 0;
 		u16* Local_u16Data = (u16*)malloc(sizeof(u16) * (Local_u8Length / 2));
 		//u16 Local_u16Data[Local_u8Length/2];
-		for (Local_u8Counter = 0; Local_u8Counter < Local_u8Length/2; Local_u8Counter++)
+		for (; Local_u8Counter < Local_u8Length / 2; Local_u8Counter++)
 		{
 			Local_u16Data[Local_u8Counter] = (u16)(((u16)(Private_u8ASCII2Hex(Copy_u8DataRecord[(4*Local_u8Counter)+9])<<4))
 					 	 	 	 	 	 	     | ((u16)(Private_u8ASCII2Hex(Copy_u8DataRecord[(4*Local_u8Counter)+10])<<0))

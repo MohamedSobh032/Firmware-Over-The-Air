@@ -1,5 +1,6 @@
 ../Src/MFMI_Program.c:21:6:MFMI_vInit	8	static
-../Src/MFMI_Program.c:36:6:MFMI_vSectorErase	16	static
-../Src/MFMI_Program.c:66:6:MFMI_vProgram	32	static
-../Src/MFMI_Program.c:97:13:Private_vFlashLock	4	static
-../Src/MFMI_Program.c:106:13:Private_vFlashUnlock	4	static
+../Src/MFMI_Program.c:36:19:MFMI_getSectorNumber	16	static
+../Src/MFMI_Program.c:55:6:MFMI_vSectorErase	16	static
+../Src/MFMI_Program.c:85:6:MFMI_vProgram	32	static
+../Src/MFMI_Program.c:116:13:Private_vFlashLock	4	static
+../Src/MFMI_Program.c:125:13:Private_vFlashUnlock	4	static
