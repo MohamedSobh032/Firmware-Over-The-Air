@@ -1,3 +1,4 @@
 ../Src/SHPR_Program.c:15:11:Private_u8ASCII2Hex	16	static
-../Src/SHPR_Program.c:22:6:SHPR_voidParseHexRecord	40	static
-../Src/SHPR_Program.c:56:4:SHPR_u8GetRecordLength	24	static
+../Src/SHPR_Program.c:22:5:SHPR_u32ParseAddress	24	static
+../Src/SHPR_Program.c:33:4:SHPR_u8GetRecordLength	24	static
+../Src/SHPR_Program.c:38:6:SHPR_vParseHexRecord	40	static

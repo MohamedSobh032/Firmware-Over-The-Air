@@ -19,8 +19,23 @@ static u8 Private_u8ASCII2Hex(u8 Copy_u8ASCII)
 	return 0;
 }
 
-void SHPR_voidParseHexRecord(u8* Copy_u8DataRecord)
-{
+u32 SHPR_u32ParseAddress(u8* Copy_u8Address) {
+	return ((u32)(Private_u8ASCII2Hex(Copy_u8Address[0]) << 28)
+		  | (u32)(Private_u8ASCII2Hex(Copy_u8Address[1]) << 24)
+		  | (u32)(Private_u8ASCII2Hex(Copy_u8Address[2]) << 20)
+		  | (u32)(Private_u8ASCII2Hex(Copy_u8Address[3]) << 16)
+		  | (u32)(Private_u8ASCII2Hex(Copy_u8Address[4]) << 12)
+		  | (u32)(Private_u8ASCII2Hex(Copy_u8Address[5]) << 8)
+		  | (u32)(Private_u8ASCII2Hex(Copy_u8Address[6]) << 4)
+		  | (u32)(Private_u8ASCII2Hex(Copy_u8Address[7]) << 0));
+}
+
+u8 SHPR_u8GetRecordLength(u8* Copy_u8DataRecord) {
+	/* Get the Length of the Record [1][2] */
+	return (Private_u8ASCII2Hex(Copy_u8DataRecord[1]) << 4) + Private_u8ASCII2Hex(Copy_u8DataRecord[2]);
+}
+
+void SHPR_vParseHexRecord(u8* Copy_u8DataRecord) {
 	/* If Start Record, Set the Base Address */
 	if (Copy_u8DataRecord[8] == '4') {
 		Global_u32BaseAddress = (u32)( ((u32)(Private_u8ASCII2Hex(Copy_u8DataRecord[9])  << 28))
@@ -50,11 +65,4 @@ void SHPR_voidParseHexRecord(u8* Copy_u8DataRecord)
 		}
 		MFMI_vProgram(Local_u32Addresss, (u16*)Local_u16Data, Local_u8Length/2);
 	}
-}
-
-
-u8 SHPR_u8GetRecordLength(u8* Copy_u8DataRecord)
-{
-	/* Get the Length of the Record [1][2] */
-	return (Private_u8ASCII2Hex(Copy_u8DataRecord[1]) << 4) + Private_u8ASCII2Hex(Copy_u8DataRecord[2]);
 }

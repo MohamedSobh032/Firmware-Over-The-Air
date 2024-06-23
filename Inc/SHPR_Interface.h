@@ -9,7 +9,9 @@
 #ifndef _SHPR_INTERFACE_H_
 #define _SHPR_INTERFACE_H_
 
+u32 SHPR_u32ParseAddress(u8* Copy_u8Address);
 u8 SHPR_u8GetRecordLength(u8* Copy_u8DataRecord);
-void SHPR_voidParseHexRecord(u8* Copy_u8DataRecord);
+void SHPR_vParseHexRecord(u8* Copy_u8DataRecord);
+
 
 #endif /* _SHPR_INTERFACE_H_ */
