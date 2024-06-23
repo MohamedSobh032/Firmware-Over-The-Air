@@ -76,7 +76,7 @@ void BOOT_vJumpToApplicationCode(void);
 /**********************************************************************************************/
 
 int main(void) {
-	BOOT_vInit();							/* Initialize the system */
+	BOOT_vInit();
 	BOOT_vGetFirmwareStatusAndAddress();
 	if (BOOT_u8Buffer == 'O') { BOOT_vJumpToApplicationCode(); }
 	else if (BOOT_u8Buffer == 'N') {
@@ -134,7 +134,7 @@ void BOOT_vHWReset(void) {
 void BOOT_vInitESP(void) {
 	/* Reset using HW reset pin */
 	BOOT_vHWReset();
-	/* Close the echo */
+	/* Close the echoing */
 	do {
 		BOOT_ContFlag = FAILED_TO_FETCH;
 		BOOT_u8TimeOut = 0;
@@ -232,7 +232,7 @@ void BOOT_vGetFirmwareStatusAndAddress(void) {
 			/* Read the buffer */
 			while (BOOT_u8TimeOut < BOOT_THRESHOLD_VALUE) {
 				MUSART_u8ReceiveByteSynchBlocking(ESP8266_USART, &BOOT_u8Buffer);
-				if (BOOT_u8Buffer == 'b') { BOOT_vInitESP(); break; }							/* 'b' means 'busy' --> reset the Module   */
+				if (BOOT_u8Buffer == 'b') { BOOT_vInitESP(); break; }							/* 'b' means 'busy' --> reset the module   */
 				else if (BOOT_u8Buffer == 'O') {												/* if 'O', read next element               */
 					MUSART_u8ReceiveByteSynchBlocking(ESP8266_USART, &BOOT_u8Buffer);
 					if (BOOT_u8Buffer == 'K') { BOOT_ContFlag = CONTINUE; break; }				/* 'K' means 'CONNECT\r\nOK' --> break     */
@@ -244,8 +244,8 @@ void BOOT_vGetFirmwareStatusAndAddress(void) {
 				}
 				BOOT_u8TimeOut++;
 			}
-		} while(BOOT_ContFlag == 0);
-		/* TCP is now connected, send data length, BOOT_u8ContFlag = 2 --> Skip data get URL command */
+		} while(BOOT_ContFlag == FAILED_TO_FETCH);
+		/* TCP is now connected */
 		do {
 			BOOT_ContFlag = FAILED_TO_FETCH;
 			BOOT_u8TimeOut = 0;
@@ -313,22 +313,22 @@ void BOOT_vGetFirmwareStatusAndAddress(void) {
  */
 void BOOT_vReceiveDataRecord(void) {
 	do {
-		/* Connect using TCP Protocol */
+		/* Connect using TCP protocol */
 		do {
 			BOOT_ContFlag = FAILED_TO_FETCH;
 			BOOT_u8TimeOut = 0;
 			MUSART_vTransmitString(ESP8266_USART,(u8*)CIPSTART);
-			/* Read the Buffer */
+			/* Read the buffer */
 			while (BOOT_u8TimeOut < BOOT_THRESHOLD_VALUE) {
 				MUSART_u8ReceiveByteSynchBlocking(ESP8266_USART, &BOOT_u8Buffer);
-				if (BOOT_u8Buffer == 'b') { BOOT_vInitESP(); break; }							/* 'b' Means 'busy' --> Reset the Module   */
-				else if (BOOT_u8Buffer == 'O') {												/* if 'O', Read Next Element               */
+				if (BOOT_u8Buffer == 'b') { BOOT_vInitESP(); break; }							/* 'b' means 'busy' --> reset the module   */
+				else if (BOOT_u8Buffer == 'O') {												/* if 'O', read next element               */
 					MUSART_u8ReceiveByteSynchBlocking(ESP8266_USART, &BOOT_u8Buffer);
-					if (BOOT_u8Buffer == 'K') { BOOT_ContFlag = CONTINUE; break; }				/* 'K' Means 'CONNECT\r\nOK' --> break     */
-					else if (BOOT_u8Buffer == 'R') {BOOT_ContFlag = FAILED_TO_FETCH ; break; }	/* 'R' Means 'ERROR' --> Connect Again     */
-				} else if (BOOT_u8Buffer == 'Y') {												/* if 'Y', Read Next Element               */
+					if (BOOT_u8Buffer == 'K') { BOOT_ContFlag = CONTINUE; break; }				/* 'K' means 'CONNECT\r\nOK' --> break     */
+					else if (BOOT_u8Buffer == 'R') {BOOT_ContFlag = FAILED_TO_FETCH ; break; }	/* 'R' means 'ERROR' --> connect again     */
+				} else if (BOOT_u8Buffer == 'Y') {												/* if 'Y', read next element               */
 					MUSART_u8ReceiveByteSynchBlocking(ESP8266_USART, &BOOT_u8Buffer);
-					if (BOOT_u8Buffer == ' ') { BOOT_ContFlag = CONTINUE; break; }				/* ' ' Means 'ALREADY CONNECTED' --> break */
+					if (BOOT_u8Buffer == ' ') { BOOT_ContFlag = CONTINUE; break; }				/* ' ' neans 'ALREADY CONNECTED' --> break */
 				}
 				BOOT_u8TimeOut++;
 			}
@@ -344,30 +344,27 @@ void BOOT_vReceiveDataRecord(void) {
 			while (BOOT_u8TimeOut < BOOT_THRESHOLD_VALUE) {
 				MUSART_u8ReceiveByteSynchBlocking(ESP8266_USART, &BOOT_u8Buffer);
 				if (BOOT_u8Buffer == 'v') { BOOT_ContFlag = CAN_NOT_SEND; break; }		/* 'v' means 'link is not valid' --> connect again */
-				else if (BOOT_u8Buffer == 'O') {										/* if 'O', read next element */
+				else if (BOOT_u8Buffer == 'O') {										/* if 'O', read next element                       */
 					MUSART_u8ReceiveByteSynchBlocking(ESP8266_USART, &BOOT_u8Buffer);
-					if (BOOT_u8Buffer == 'K') { BOOT_ContFlag = CONTINUE; break; }		/* 'K' means '\r\nOK' --> break */
-				} else if (BOOT_u8Buffer == 'b') { BOOT_vInitESP(); break; }			/* 'b' means 'busy' --> reset the module */
+					if (BOOT_u8Buffer == 'K') { BOOT_ContFlag = CONTINUE; break; }		/* 'K' means '\r\nOK' --> break                    */
+				} else if (BOOT_u8Buffer == 'b') { BOOT_vInitESP(); break; }			/* 'b' means 'busy' --> reset the module           */
 				BOOT_u8TimeOut++;
 			}
 		} while (BOOT_ContFlag == FAILED_TO_FETCH);
 		if (BOOT_ContFlag != CAN_NOT_SEND) {
 			MUSART_vTransmitString(ESP8266_USART,(u8*)"GET http://sobhhhh.freevar.com/script.php?line=");
-		    if (BOOT_u8CounterD2 != '0') {
-		    	/* If Not '0' --> Hundreds */
+		    if (BOOT_u8CounterD2 != '0') { /* 3 digits */
 		    	MUSART_vTransmitByte(ESP8266_USART, BOOT_u8CounterD2);
 		        MUSART_vTransmitByte(ESP8266_USART, BOOT_u8CounterD1);
 		        MUSART_vTransmitByte(ESP8266_USART, BOOT_u8CounterD0);
-		    } else if (BOOT_u8CounterD1 != '0') {
-		    	/* If Not '0' --> Tens */
+		    } else if (BOOT_u8CounterD1 != '0') { /* 2 digits */
 		    	MUSART_vTransmitByte(ESP8266_USART, BOOT_u8CounterD1);
 		        MUSART_vTransmitByte(ESP8266_USART, BOOT_u8CounterD0);
-		    } else {
-		    	/* If Both '0' --> Ones */
+		    } else { /* 1 digit */
 		    	MUSART_vTransmitByte(ESP8266_USART, BOOT_u8CounterD0);
 		    }
 		    MUSART_vTransmitString(ESP8266_USART,(u8*)"\r\n");
-		    /* Receive the Data Record */
+		    /* Receive the data records */
 		    MUSART_vReceiveStringSynchBlocking(ESP8266_USART, BOOT_u8DataRecord);
 		}
 	} while (BOOT_u8DataRecord[21] != ':' && BOOT_u8DataRecord[22] != ':');
@@ -435,7 +432,7 @@ void BOOT_vUpdateFirmwareStatus(void) {
 					if (BOOT_u8Buffer == 'K') { BOOT_ContFlag = CONTINUE; break; }		/* 'K' means 'CONNECT\r\nOK' --> break     */
 				} else if (BOOT_u8Buffer == 'Y') {										/* if 'Y', read next element			   */
 					MUSART_u8ReceiveByteSynchBlocking(ESP8266_USART, &BOOT_u8Buffer);
-					if (BOOT_u8Buffer == ' ') { BOOT_ContFlag = CONTINUE; break; }	/* ' ' means 'ALREADY CONNECTED' --> break */
+					if (BOOT_u8Buffer == ' ') { BOOT_ContFlag = CONTINUE; break; }		/* ' ' means 'ALREADY CONNECTED' --> break */
 				}
 				BOOT_u8TimeOut++;
 			}
@@ -445,7 +442,7 @@ void BOOT_vUpdateFirmwareStatus(void) {
 			BOOT_ContFlag = FAILED_TO_FETCH;
 			BOOT_u8TimeOut = 0;
 			MUSART_vTransmitString(ESP8266_USART,(u8*)"AT+CIPSEND=49\r\n");
-			/* Read the Buffer */
+			/* Read the buffer */
 			while (BOOT_u8TimeOut < BOOT_THRESHOLD_VALUE) {
 				MUSART_u8ReceiveByteSynchBlocking(ESP8266_USART, &BOOT_u8Buffer);
 				if (BOOT_u8Buffer == 'v') { BOOT_ContFlag = CAN_NOT_SEND; break; }	/* 'v' means 'link is not valid' --> connect again */
@@ -488,10 +485,9 @@ void BOOT_vJumpToApplicationCode(void) {
 	u32 MSP_VALUE = *((volatile u32*)BOOT_u32Address);
 	__asm volatile("MSR MSP,%0"::"r"(MSP_VALUE));
 	/* Set the vector table */
-	*((volatile u32*) 0xE000ED08) = 0x08004000;
+	*((volatile u32*) 0xE000ED08) = BOOT_u32Address;
 	/* Jump to the reset handler of the application code */
-	void (*JUMP_TO_APPLICATION_CODE)(void);									/* Create a pointer to function					*/
-	u32 BOOT_ResetHandlerAddress = *((volatile u32*)BOOT_u32Address + 4);	/* Get the address of the reset handler			*/
-	JUMP_TO_APPLICATION_CODE = (void*)BOOT_ResetHandlerAddress;				/* Point it to the address of the reset handler	*/
-	JUMP_TO_APPLICATION_CODE();												/* Jump to the reset handler					*/
+	void (*JUMP_TO_APPLICATION_CODE)(void);										/* Create a pointer to function					*/
+	JUMP_TO_APPLICATION_CODE = (void*)(*((volatile u32*)BOOT_u32Address + 4));	/* Point it to the address of the reset handler	*/
+	JUMP_TO_APPLICATION_CODE();													/* Jump to the reset handler					*/
 }

@@ -6,4 +6,4 @@
 ../Src/main.c:314:6:BOOT_vReceiveDataRecord	8	static
 ../Src/main.c:389:6:BOOT_vCloseConnection	8	static
 ../Src/main.c:422:6:BOOT_vUpdateFirmwareStatus	8	static
-../Src/main.c:486:6:BOOT_vJumpToApplicationCode	24	static,ignoring_inline_asm
+../Src/main.c:486:6:BOOT_vJumpToApplicationCode	16	static,ignoring_inline_asm
