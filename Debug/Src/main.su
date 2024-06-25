@@ -4,6 +4,6 @@
 ../Src/main.c:187:6:BOOT_vInit	24	static
 ../Src/main.c:224:6:BOOT_vGetFirmwareStatusAndAddress	16	static
 ../Src/main.c:314:6:BOOT_vReceiveDataRecord	8	static
-../Src/main.c:389:6:BOOT_vCloseConnection	8	static
-../Src/main.c:422:6:BOOT_vUpdateFirmwareStatus	8	static
-../Src/main.c:486:6:BOOT_vJumpToApplicationCode	16	static,ignoring_inline_asm
+../Src/main.c:386:6:BOOT_vCloseConnection	8	static
+../Src/main.c:419:6:BOOT_vUpdateFirmwareStatus	8	static
+../Src/main.c:483:6:BOOT_vJumpToApplicationCode	16	static,ignoring_inline_asm
