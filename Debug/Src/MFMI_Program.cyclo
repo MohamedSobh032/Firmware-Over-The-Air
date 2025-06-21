@@ -1,6 +1,0 @@
-../Src/MFMI_Program.c:21:6:MFMI_vInit	1
-../Src/MFMI_Program.c:36:19:MFMI_getSectorNumber	9
-../Src/MFMI_Program.c:55:6:MFMI_vSectorErase	3
-../Src/MFMI_Program.c:85:6:MFMI_vProgram	4
-../Src/MFMI_Program.c:116:13:Private_vFlashLock	1
-../Src/MFMI_Program.c:125:13:Private_vFlashUnlock	1
